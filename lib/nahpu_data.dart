@@ -3,7 +3,7 @@ import 'package:package_config/package_config.dart';
 
 enum NahpuDataSet { mergeTestA, mergeTestB }
 
-enum NahpuDataType { db, project }
+enum NahpuDataType { db, project, site }
 
 Future<File> _getDataFile(NahpuDataSet dataSet, NahpuDataType type) async {
   final config = await findPackageConfig(Directory.current);
@@ -33,6 +33,11 @@ Future<File> _getDataFile(NahpuDataSet dataSet, NahpuDataType type) async {
 
 Future<String> getProjects(NahpuDataSet dataSet) async {
   final file = await _getDataFile(dataSet, NahpuDataType.project);
+  return file.readAsString();
+}
+
+Future<String> getSites(NahpuDataSet dataSet) async {
+  final file = await _getDataFile(dataSet, NahpuDataType.site);
   return file.readAsString();
 }
 
